@@ -30,10 +30,10 @@
 3) 评测与运行
 - 评测脚本：`evaluation.py`（默认从 `input/test_y.txt` 与 `output/predict.npy` 读取，计算 RMSE）。
 
-5) 选做内容
+4) 选做内容
 - 使用 `data_generate.py` 自行合成数据（可调噪声、真值参数、维度），对比不同设置对训练与泛化的影响。
 
 ## 提交内容
-运行Exercise1_Linear_Regression.ipynb，并转为PDF或html，并提交到elearning.
+运行Exercise1_Linear_Regression.ipynb，并转为PDF或html（需包含代码运行结果和三道Questions的回答），并提交到elearning.
 
 
