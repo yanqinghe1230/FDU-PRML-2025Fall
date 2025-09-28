@@ -30,49 +30,24 @@ def pairwise_dist(X_test, X_train, metric, mode):
     if metric == "l2":
         if mode == "two_loops":
             # =============== TODO (students, REQUIRED) ===============
-            dists = np.zeros((Nte, Ntr), dtype=np.float64)
-            for i in range(Nte):
-                for j in range(Ntr):
-                    diff = X_test[i] - X_train[j]
-                    dists[i, j] = np.sqrt(np.dot(diff, diff))
-            return dists
+
             # =========================================================
-            #raise NotImplementedError("Implement L2 two_loops")
+            raise NotImplementedError("Implement L2 two_loops")
 
         elif mode == "no_loops":
             # =============== TODO (students, REQUIRED) ===============
-            te_sq = (X_test**2).sum(axis=1)[:, None]   # (Nte,1)
-            tr_sq = (X_train**2).sum(axis=1)[None, :]  # (1,Ntr)
-            cross = X_test @ X_train.T                 # (Nte,Ntr)
-            d2 = te_sq + tr_sq - 2.0 * cross
-            d2 = np.maximum(d2, 0.0)                   # numerical guard
-            return np.sqrt(d2)
-            # =========================================================
-            #raise NotImplementedError("Implement L2 no_loops")
 
-        elif mode == "one_loop":
-            # =============== OPTIONAL (bonus) ===============
-            dists = np.zeros((Nte, Ntr), dtype=np.float64)
-            for i in range(Nte):
-                diff = X_train - X_test[i]             # (Ntr,D)
-                dists[i] = np.sqrt(np.sum(diff*diff, axis=1))
-            return dists
-            # ================================================
-            #raise NotImplementedError("Optional: L2 one_loop")
+            # =========================================================
+            raise NotImplementedError("Implement L2 no_loops")
 
         else:
             raise ValueError("Unknown mode for L2.")
 
     elif metric == "cosine":
-        # =============== OPTIONAL (bonus) ===============
-        eps = 1e-12
-        te_norm = np.linalg.norm(X_test,  axis=1, keepdims=True) + eps  # (Nte,1)
-        tr_norm = np.linalg.norm(X_train, axis=1, keepdims=True).T + eps# (1,Ntr)
-        sim = (X_test @ X_train.T) / (te_norm * tr_norm)                # (Nte,Ntr)
-        sim = np.clip(sim, -1.0, 1.0)
-        return 1.0 - sim
+        # =============== TODO (students, REQUIRED) ===============
+
         # ================================================
-        #raise NotImplementedError("Optional: cosine distance")
+        raise NotImplementedError("cosine distance")
     else:
         raise ValueError("metric must be 'l2' or 'cosine'.")
 
@@ -97,9 +72,9 @@ def knn_predict(X_test, X_train, y_train, k, metric, mode):
         neighbors = y_train[idx]
 
         # =============== TODO (students, REQUIRED) ===============
-        y_pred[i] = np.bincount(neighbors).argmax()
+
         # ===========================================
-        #raise NotImplementedError("Implement majority vote in knn_predict")
+        raise NotImplementedError("Implement majority vote in knn_predict")
 
     return y_pred
 
@@ -115,20 +90,9 @@ def select_k_by_validation(X_train, y_train, X_val, y_val, ks: List[int], metric
     accs   : list of validation accuracies aligned with ks
     """
     # =============== TODO (students, REQUIRED) ===============
-    def _acc(y_true, y_pred): 
-        return float((np.asarray(y_true) == np.asarray(y_pred)).mean())
-    
-    accs = []
-    best_k, best_acc = None, -1.0
-    for k in ks:
-        yv = knn_predict(X_val, X_train, y_train, k, metric=metric, mode=mode)
-        acc = _acc(y_val, yv)
-        accs.append(acc)
-        if acc > best_acc:
-            best_acc, best_k = acc, k
-    return best_k, accs
+
     # =========================================================
-    #raise NotImplementedError("Implement select_k_by_validation")
+    raise NotImplementedError("Implement select_k_by_validation")
 
 
 def run_with_visualization():

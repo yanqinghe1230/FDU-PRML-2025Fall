@@ -9,9 +9,8 @@ from decision_tree import DecisionTreeClassifier
 def test_dt_classification():
 	X = np.array([[-2, -1], [-1, -1], [-1, -2], [1, 1], [1, 2], [2, 1]])
 	y = np.array([-1, -1, -1, 1, 1, 1])
-
 	T = np.array([[-1, -1], [2, 2], [3, 2]])
-	import pdb; pdb.set_trace()
+
 	criterion = "info_gain"
 	true_result = np.array([-1, 1, 1])
 	dt_clf = DecisionTreeClassifier(criterion=criterion, random_state=0)

@@ -71,7 +71,6 @@ def test_select_k_by_validation():
     assert len(accs) == len(ks), "Acc list length mismatch"
     assert all(abs(a-1.0) < 1e-12 for a in accs), "All accuracies should be 1.0 here"
 
-
 if __name__ == "__main__":
     # Simple manual run
     test_pairwise_l2_equivalence()
