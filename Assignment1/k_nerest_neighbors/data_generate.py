@@ -6,12 +6,13 @@ DATA_DIR = "./input_knn"
 os.makedirs(DATA_DIR, exist_ok=True)
 
 # ---- 数据规模与难度（可按需微调）----
-RANDOM_STATE = 42
-N_SAMPLES    = 300      # 200-400
-N_CLASSES    = 4        # 4 类
-CLUSTER_STD  = 3        # 数值越大，类间越模糊 [2.5, 3, 3.5, 4]
-TEST_SIZE    = 0.25
-VAL_SIZE     = 0.25
+RANDOM_STATE = 42       # 随机种子 [任意整数]
+N_SAMPLES    = 500      # 数据组数 [300 - 1000]
+N_CLASSES    = 4        # 希望有几类数据（在boundary图上能看到几个色块） [3 - 6]
+CLUSTER_STD  = 4        # 数值越大，数据点间越模糊，越不会形成明显的数据团 [2 - 6]
+TEST_SIZE    = 0.25     # 测试集比例
+VAL_SIZE     = 0.25     # 验证集比例
+
 
 # ---- 生成 2D 多类别数据（适合决策边界可视化）----
 X, y = make_blobs(n_samples=N_SAMPLES,
