@@ -48,7 +48,9 @@ def test_dt_classification():
 							 show_leaf_samples=True,
 							 top_padding=0.18)
 		ax.set_title(f"Decision Tree ({crit}) acc={acc:.2f}")
-		plt.savefig(f"output/iris_{crit}.png")
+		if not Path("decision_tree/output").exists():
+			Path("decision_tree/output").mkdir(parents=True)
+		plt.savefig(f"decision_tree/output/iris_{crit}.png")
 
 
 if __name__ == '__main__':
