@@ -1,9 +1,7 @@
 """
 criterion
 """
-
 import math
-
 
 def get_criterion_function(criterion):
     if criterion == "info_gain":
