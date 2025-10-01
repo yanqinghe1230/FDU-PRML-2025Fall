@@ -2,9 +2,7 @@
 decision tree test
 """
 
-import numpy as np
 import pandas as pd
-from numpy.testing import assert_array_equal
 from decision_tree import DecisionTreeClassifier
 from viz_tree import plot_tree
 import matplotlib.pyplot as plt
@@ -48,9 +46,7 @@ def test_dt_classification():
 							 show_leaf_samples=True,
 							 top_padding=0.18)
 		ax.set_title(f"Decision Tree ({crit}) acc={acc:.2f}")
-		if not Path("decision_tree/output").exists():
-			Path("decision_tree/output").mkdir(parents=True)
-		plt.savefig(f"decision_tree/output/iris_{crit}.png")
+		plt.savefig(f"output/iris_{crit}.png")
 
 
 if __name__ == '__main__':
