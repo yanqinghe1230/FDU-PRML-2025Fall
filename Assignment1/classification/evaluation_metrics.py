@@ -39,22 +39,18 @@ def _binary_counts(y_true, y_pred):
 def precision_score(y_true, y_pred):
     """Precision = TP / (TP + FP)"""
     tp, fp, _, _ = _binary_counts(y_true, y_pred)
-    # =============== TODO (students) ===============
-
-    # ===============================================
-    raise NotImplementedError("Implement precision_score")
+    score=tp/(tp+fp)
+    return score
 
 def recall_score(y_true, y_pred):
     """Recall = TP / (TP + FN)"""
     tp, _, fn, _ = _binary_counts(y_true, y_pred)
-    # =============== TODO (students) ===============
-
-    # ===============================================
-    raise NotImplementedError("Implement recall_score")
+    score=tp/(tp+fn)
+    return score
 
 def f1_score(y_true, y_pred):
     """F1 = 2 * (P * R) / (P + R)"""
-    # =============== TODO (students) ===============
-
-    # ===============================================
-    raise NotImplementedError("Implement f1_score")
+    p_score=precision_score(y_true,y_pred)
+    r_score=recall_score(y_true,y_pred)
+    score= 2*(p_score*r_score)/(p_score+r_score+EPS)
+    return score

@@ -168,7 +168,9 @@ class DecisionTreeClassifier(object):
                 l, r = self._thr_split(X, c, thr, n_sample)
                 l_y = y[l]
                 r_y = y[r]
-
+                
+                if len(l_y) == 0 or len(r_y) == 0:
+                    continue
                 score = self._score_func(y, l_y, r_y)
                 if score > max_score:
                     l_Xy = X[l, :]
@@ -184,7 +186,10 @@ class DecisionTreeClassifier(object):
                     l, r = self._thr_split(X, c, thr, n_sample)
                     l_y = y[l]
                     r_y = y[r]
-
+                    
+                    if len(l_y) == 0 or len(r_y) == 0:
+                        continue
+                    
                     score = self._score_func(y, l_y, r_y)
                     if score > max_score:
                         l_Xy = X[l, :]
