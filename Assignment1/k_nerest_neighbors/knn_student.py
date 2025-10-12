@@ -121,13 +121,13 @@ def run_with_visualization():
     X_train, y_train, X_val, y_val, X_test, y_test = load_prepared_dataset(DATA_DIR)
 
     ks = [1, 3, 5, 7, 9, 11, 13]
-    metric = "cosine"           # ["l2", "cosine"]
+    metric = "cosine"            # ["l2", "cosine"]
     mode   = "no_loops"     # ["two_loops", "no_loops", "one_loop"]
 
     best_k, accs = select_k_by_validation(X_train, y_train, X_val, y_val,
                                           ks, metric=metric, mode=mode)
     print(f"[ModelSelect] best k={best_k} (val acc={max(accs):.4f})")
-    plot_k_curve(ks, accs, os.path.join(OUT_DIR, "knn_k_curve.png"))
+    plot_k_curve(ks, accs, os.path.join(OUT_DIR, f"knn_k_curve_{metric}2.png"))
 
     X_trv = np.vstack([X_train, X_val]); y_trv = np.hstack([y_train, y_val])
     def predict_fn_for_k(k):
@@ -136,7 +136,7 @@ def run_with_visualization():
     ks_panel = sorted(set(ks + [best_k]))
     plot_decision_boundary_multi(predict_fn_for_k, X_train, y_train, X_test, y_test,
                                  ks=ks_panel,
-                                 out_path=os.path.join(OUT_DIR, "knn_boundary_grid.png"),
+                                 out_path=os.path.join(OUT_DIR, f"knn_boundary_grid_{metric}2.png"),
                                  grid_n=200, batch_size=4096)
 
 

@@ -6,9 +6,9 @@ from sklearn.model_selection import train_test_split
 # ===================== 可调参数 =====================
 DATA_DIR     = "./input_knn"    # 输入数据目录
 RANDOM_STATE = 42               # 随机种子
-N_SAMPLES    = 500              # 样本总数
-N_CLASSES    = 4                # 类别数 （在boundary图上会有几个色块）
-CLUSTER_STD  = 4.0              # 类内标准差（数据难度）
+N_SAMPLES    = 1200              # 样本总数
+N_CLASSES    = 3                # 类别数 （在boundary图上会有几个色块）
+CLUSTER_STD  = 3.0              # 类内标准差（数据难度）
 TEST_SIZE    = 0.25             # 测试集比例    
 VAL_SIZE     = 0.25             # 验证集比例
 # ===================================================
