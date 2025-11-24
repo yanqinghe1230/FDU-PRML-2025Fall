@@ -58,9 +58,9 @@ class LinearClassifier(object):
             # 提示: 使用 np.random.choice 生成索引。有放回采样比无放回采样更快。          #
             #########################################################################
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
-
-            pass
-
+            index=np.random.choice(num_train,batch_size,replace=True)
+            X_batch=X[index]
+            y_batch=y[index]
             # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
             # 评估损失和梯度
@@ -74,7 +74,7 @@ class LinearClassifier(object):
             #########################################################################
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
-            pass
+            self.W -= learning_rate * grad
 
             # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
@@ -99,8 +99,7 @@ class LinearClassifier(object):
         # 实现此方法。将预测标签存储在 y_pred 中。                                    #
         ###########################################################################
         # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
-
-        pass
+        y_pred = np.argmax(X.dot(self.W), axis=1)
 
         # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
         return y_pred
@@ -119,7 +118,8 @@ class LinearClassifier(object):
         - loss 作为单个浮点数
         - 关于 self.W 的梯度；与 W 形状相同的数组
         """
-        pass
+        loss=svm_loss_vectorized(self.W, X_batch, y_batch, reg)
+        return loss
 
 
 class LinearSVM(LinearClassifier):

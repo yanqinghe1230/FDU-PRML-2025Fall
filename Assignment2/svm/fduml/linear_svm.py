@@ -24,19 +24,6 @@ def svm_loss_naive(W, X, y, reg):
     num_classes = W.shape[1]
     num_train = X.shape[0]
     loss = 0.0
-    for i in range(num_train):
-        scores = X[i].dot(W)
-        correct_class_score = scores[y[i]]
-        for j in range(num_classes):
-            if j == y[i]:
-                continue
-            margin = scores[j] - correct_class_score + 1  # note delta = 1
-            if margin > 0:
-                loss += margin
-
-    loss /= num_train
-
-    loss += reg * np.sum(W * W)
 
     #############################################################################
     # TODO:                                                                     #
@@ -45,9 +32,25 @@ def svm_loss_naive(W, X, y, reg):
     # 可以修改上面的一些代码来计算梯度                                         # 
     #############################################################################
     # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
+    for i in range(num_train):
+        scores = X[i].dot(W)
+        correct_class_score = scores[y[i]]
+        count=0
+        for j in range(num_classes):
+            if j == y[i]:
+                continue
+            margin = scores[j] - correct_class_score + 1  # note delta = 1
+            if margin > 0:
+                loss += margin
+                count+=1
+                dW[:,j]+=X[i]
+        dW[:,y[i]]-=count*X[i]
+    dW/=num_train        
+    dW += 2 * reg * W
+    loss /= num_train
 
-    pass
-
+    loss += reg * np.sum(W * W)
+    
     # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
     return loss, dW
@@ -67,9 +70,14 @@ def svm_loss_vectorized(W, X, y, reg):
     # 实现结构化SVM损失的向量化版本，将结果存储在loss中。                           #
     #############################################################################
     # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
-
-    pass
-
+    N=X.shape[0]
+    scores=X.dot(W)
+    correct_scores=scores[np.arange(N),y].reshape(N,1)
+    margins=scores-correct_scores+1
+    margins[np.arange(N),y]=0
+    margins=np.maximum(0,margins)
+    loss=np.sum(margins)/N
+    loss+=reg*np.sum(W*W)
     # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 
     #############################################################################
@@ -78,8 +86,12 @@ def svm_loss_vectorized(W, X, y, reg):
     # 提示：与其从头计算梯度，重用一些损失计算时的中间值可能更容易                   #
     #############################################################################
     # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
-
-    pass
+    binary=np.zeros(margins.shape)
+    binary[margins>0]=1
+    row_sum=np.sum(binary,axis=1)
+    binary[np.arange(N),y]=-row_sum
+    dW=X.T.dot(binary)/N
+    dW+=2*reg*W
 
     # *****END OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
 

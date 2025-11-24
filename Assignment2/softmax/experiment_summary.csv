@@ -1,0 +1,14 @@
+Experiment,Parameter,Best Val Acc,Final Val Acc,Final Val Loss
+Learning Rate,0.0001,0.3154,0.3154,-0.1109
+Learning Rate,0.001,0.6898,0.6898,-0.6525
+Learning Rate,0.01,0.7472,0.7472,-0.7447
+Learning Rate,0.1,0.7437,0.7396,-0.7400
+Batch Size,16,0.7386,0.7386,-0.7360
+Batch Size,32,0.7501,0.7469,-0.7460
+Batch Size,64,0.7455,0.7452,-0.7432
+Batch Size,128,0.8017,0.7987,-0.7944
+Architecture,小网络,0.6519,0.6498,-0.6475
+Architecture,中网络,0.8120,0.8120,-0.8077
+Architecture,大网络,0.7469,0.7469,-0.7447
+Optimizer,SGD,0.7532,0.7532,-0.7093
+Optimizer,Adam,0.8509,0.8509,-0.8504
